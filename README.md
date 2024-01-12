@@ -7,8 +7,8 @@ Below are some guidelines that you should follow to ensure clean and maintainabl
 ### 1. Naming Conventions
 Use clear and descriptive names. Variables should use "camelCase" and classes should use "PascalCase".
 
-### 2. Code Formatting
-Ensure your code is formatted according to the "Visual Studio" style. This is the default for the C++ extension for VSCode.
+### 2. Comment Formatting
+Format your doc comments according to the Doxygen style. Use ChatGPT or Copilot to generate docs for classes and functions if you don't want to bother learning Doxygen.
 
 ### 3. Line Length
 Try not to write super long lines. If you can, break it up into smaller chunks or simply use the next line.
