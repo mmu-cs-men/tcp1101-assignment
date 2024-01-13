@@ -9,5 +9,5 @@ enum class TokenType
     OpenBracket,
     ClosedBracket,
     NumLiteral,
-    EOF
+    Eof
 };
