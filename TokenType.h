@@ -1,7 +1,11 @@
 #pragma once
 enum class TokenType
 {
-    Opcode,
+    UnaryOpcodem,
+    MovOpcode,
+    ArithmeticOpcode,
+    BitwiseOpcode,
+    SerialOpcode,
     Register,
     Whitespace,
     Newline,
