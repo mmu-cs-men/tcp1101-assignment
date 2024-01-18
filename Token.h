@@ -2,21 +2,17 @@
 #include "TokenType.h"
 #include <string>
 
-/**
- * @brief Represents a token in the program.
- */
 class Token
 {
     public:
         /**
-         * @brief Constructs a new Token object.
+         * @brief Constructs a Token object with the specified type and content.
          *
-         * @param type The type of the token.
-         * @param content The content of the token. Content for TokenType::Register should be in the form of 0-6. For
-         * example, R0 is 0 and R4 is 4. TokenType::NumLiteral should be an integer. TokenType::Opcode should be the
-         * 'MOV', 'ADD', etc. The content for all other token types doesn't really matter but should be an empty string.
+         * @param _type The type of the token.
+         * @param _content The content of the token. For example, if type is `TokenType::UnaryOpcode`, content must be
+         * either IN, OUT, INC, DEC
          */
-        Token(TokenType type, std::string content);
+        Token(TokenType _type, std::string _content);
 
         /**
          * @brief Gets the content of the token.
