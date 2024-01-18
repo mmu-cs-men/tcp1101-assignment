@@ -9,8 +9,8 @@ class Token
          * @brief Constructs a Token object with the specified type and content.
          *
          * @param _type The type of the token.
-         * @param _content The content of the token. For example, if type is `TokenType::UnaryOpcode`, content must be
-         * either IN, OUT, INC, DEC
+         * @param _content The content of the token. For example, if type is
+         * `TokenType::UnaryOpcode`, content must be either IN, OUT, INC, DEC
          */
         Token(TokenType _type, std::string _content);
 

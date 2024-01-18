@@ -1,2 +1,3 @@
 BasedOnStyle: Microsoft
 IndentAccessModifiers: true
+ColumnLimit: 80
