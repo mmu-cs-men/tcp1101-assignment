@@ -2,10 +2,10 @@
 #include <string>
 
 // I'm not gonna overcomplicate this by putting input validation, sorry not sorry!
-Token::Token(TokenType type, std::string content)
+Token::Token(TokenType _type, std::string _content)
 {
-    this->type = type;
-    this->content = content;
+    type = _type;
+    content = _content;
 }
 
 std::string Token::getContent()
