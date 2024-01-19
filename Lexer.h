@@ -9,7 +9,7 @@ class Lexer
 
         /**
          * Constructs a Lexer object.
-         * @param program The ASM code as a string to be tokenized.
+         * @param program ASM code as a string to be tokenized.
          */
         Lexer(std::string program);
 
