@@ -32,12 +32,13 @@ class Lexer
         int currentPosition;
 
         /**
-         * @brief Declaration of readWord mehtod. 
-         * @note - Member variable of class Lexer.
-         * @note - Operates on'inputProgram' & 'currentPosition'
-         * @param -None
-         * @return - string.
+         * @brief   Declaration of readWord mehtod. 
+         * @note   - Member variable of class Lexer.
+         * @note   - Operates on'inputProgram' & 'currentPosition'
+         * @param  - None
+         * @return - Type string.
         */
+       
         std::string readWord();
 
 };
