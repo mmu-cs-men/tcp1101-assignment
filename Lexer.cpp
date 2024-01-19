@@ -14,13 +14,13 @@ Lexer::Lexer(std::string program) : inputProgram(program), currentPosition(0)
 }
 
 std::string Lexer::readWord()
-{   
+{
     std::string word;
-    
-    // Skips spases and commas in the start of the program  
+
+    // Skips spases and commas in the start of the program
     while (currentPosition < inputProgram.length() && (inputProgram[currentPosition] == ' ') ||
            (inputProgram[currentPosition] == ','))
-    {
+    {  
         currentPosition++;
     }
 
@@ -48,13 +48,20 @@ std::vector<Token> Lexer::getTokens()
     std::vector<Token> tokens;
 
     while (currentPosition < inputProgram.length())
-    {   
-        //Read word from current position
+    {
+        // Read word from current position
         std::string word = readWord();
 
-        if (word == "IN" ||word == "OUT" || word == "INC" || word == "DEC" ){
-            tokens.push_back(Token(TokenType:: UnaryOpcode,word));
+        if (word == "IN" || word == "OUT" || word == "INC" || word == "DEC")
+        {
+            tokens.push_back(Token(TokenType::UnaryOpcode, word));
+            currentPosition++;
+        }
 
+        std::string reg = readWord();
+        if (reg == "R0" || reg == "R1" || reg == "R2" || reg == "R3" || reg == "R4" || reg == "R5" || reg == "R6")
+        {
+            tokens.push_back(Token(TokenType::Register, reg));
             currentPosition++;
             
         }
