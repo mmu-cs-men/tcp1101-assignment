@@ -14,20 +14,21 @@ class Lexer
         Lexer(std::string program);
 
         /**
-         * @brief - Declaration of getTokens method
-         * @note  - Process ASM code and identify tokens.
-         * @note  - Returns tokens as a vector of <Token>.
-         * @note  - Example: "IN  R0" will return a vector containing tokens UnaryOpcode, Whitespace, and Register.
+         * @param  -None
+         * @brief  - Declaration of getTokens() method
+         * @note   - Process ASM code and identify tokens.
+         * @note   - Example: "IN  R0" will return a vector containing tokens UnaryOpcode, Whitespace, and Register.
+         * @return  Tokens a vector of <Token>.
          */
         std::vector<Token>getTokens();
         
     private:
-        // Holds ASM program as string 
-        // Input that lexer will process
+        // - Holds ASM program as string 
+        // - Input that lexer will process
         std::string inputProgram;
 
-        // Tracks current possition in the input program during tokenization. 
-        // Determins where in the ASM code lexer is during tokenization process.
+        // - Tracks current possition in the input program during tokenization. 
+        // - Determins where in the ASM code lexer is during tokenization process.
         int currentPosition;
 
         /**
