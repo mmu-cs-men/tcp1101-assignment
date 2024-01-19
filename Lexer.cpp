@@ -1,5 +1,6 @@
 #include "Lexer.h"
 #include "Token.h"
+#include "TokenType.h"
 #include <iostream>
 
 /**
@@ -47,8 +48,16 @@ std::vector<Token> Lexer::getTokens()
     std::vector<Token> tokens;
 
     while (currentPosition < inputProgram.length())
-    {
+    {   
+        //Read word from current position
         std::string word = readWord();
+
+        if (word == "IN" ||word == "OUT" || word == "INC" || word == "DEC" ){
+            tokens.push_back(Token(TokenType:: UnaryOpcode,word));
+
+            currentPosition++;
+            
+        }
     }
 
     return tokens;
