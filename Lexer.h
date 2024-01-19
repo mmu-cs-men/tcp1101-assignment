@@ -38,7 +38,6 @@ class Lexer
          * @param  - None
          * @return - Type string.
         */
-       
         std::string readWord();
 
 };
