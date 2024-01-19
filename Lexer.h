@@ -24,7 +24,7 @@ class Lexer
     private:
         // Holds ASM program as string 
         // Input that lexer will process
-        std::string intputProgram;
+        std::string inputProgram;
 
         // Tracks current possition in the input program during tokenization 
         // Determins where in the ASM code lexer is during tokenization process
