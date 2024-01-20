@@ -106,6 +106,12 @@ std::vector<Token> Lexer::getTokens()
         {
             tokens.push_back(Token(TokenType::ArithmeticOpcode, word));
         }
+
+        // BitwiseOpcode handler
+        else if(word == "ROL" || word == "ROR" || word == "SHL" || word == "SHR")
+        {
+            tokens.push_back(Token(TokenType::BitwiseOpcode,word));
+        }
     }
 
     return tokens;
