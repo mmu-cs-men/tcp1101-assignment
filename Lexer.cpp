@@ -138,8 +138,11 @@ std::vector<Token> Lexer::getTokens()
         }
     }
 
-    // Eof handler
-    tokens.push_back(Token(TokenType::Eof, ""));
+    //Handling Eof
+    if (currentPosition >= inputProgram.length())
+    {
+        tokens.push_back(Token(TokenType::Eof, ""));
+    }
 
     return tokens;
 }
