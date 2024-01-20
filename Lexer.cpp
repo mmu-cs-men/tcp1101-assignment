@@ -108,38 +108,38 @@ std::vector<Token> Lexer::getTokens()
         }
 
         // BitwiseOpcode handler
-        else if(word == "ROL" || word == "ROR" || word == "SHL" || word == "SHR")
+        else if (word == "ROL" || word == "ROR" || word == "SHL" || word == "SHR")
         {
-            tokens.push_back(Token(TokenType::BitwiseOpcode,word));
+            tokens.push_back(Token(TokenType::BitwiseOpcode, word));
         }
 
         // SerialOpcode handler
-        else if(word == "LOAD" || word == "STORE")
+        else if (word == "LOAD" || word == "STORE")
         {
-            tokens.push_back(Token(TokenType::SerialOpcode,word));
+            tokens.push_back(Token(TokenType::SerialOpcode, word));
         }
 
         // OpenBracket handler
-        else if(word == "[")
+        else if (word == "[")
         {
-            tokens.push_back(Token(TokenType::OpenBracket,word));
+            tokens.push_back(Token(TokenType::OpenBracket, word));
         }
 
         // CloseBracket handler
-        else if(word == "]")
+        else if (word == "]")
         {
-            tokens.push_back(Token(TokenType::OpenBracket,word));
+            tokens.push_back(Token(TokenType::OpenBracket, word));
         }
-        
+
         // NumLiteral handler
-        else if(!word.empty() && std::isdigit(word[0])) 
+        else if (!word.empty() && std::isdigit(word[0]))
         {
-            tokens.push_back(Token(TokenType::NumLiteral,word));
+            tokens.push_back(Token(TokenType::NumLiteral, word));
         }
     }
-    
+
     // Eof handler
-    tokens.push_back(Token(TokenType::Eof,""));
+    tokens.push_back(Token(TokenType::Eof, ""));
 
     return tokens;
 }
