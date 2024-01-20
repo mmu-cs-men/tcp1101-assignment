@@ -39,7 +39,7 @@ std::string Lexer::readWord()
     // Reads word until hitting space , comma , newline
     std::string word;
     while (currentPosition < inputProgram.length() && inputProgram[currentPosition != ' '] &&
-           inputProgram[currentPosition] != ',' && inputProgram[currentPosition] != '/n')
+           inputProgram[currentPosition] != ',' && inputProgram[currentPosition] != '\n')
     {
         word += inputProgram[currentPosition];
         currentPosition++;
@@ -132,7 +132,7 @@ std::vector<Token> Lexer::getTokens()
         }
         
         // NumLiteral handler
-        else if(!word.empty() && std::isdigit(word[0])) //
+        else if(!word.empty() && std::isdigit(word[0])) 
         {
             tokens.push_back(Token(TokenType::NumLiteral,word));
         }
