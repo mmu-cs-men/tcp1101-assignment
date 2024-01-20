@@ -64,29 +64,36 @@ std::vector<Token> Lexer::getTokens()
         // Read word from current position
         std::string word = readWord();
 
+        // Whitespace handler
         if (word == " ")
         {
             tokens.push_back(Token(TokenType::Whitespace, word));
         }
-
+        // Comma handler
         else if (word == ",")
         {
             tokens.push_back(Token(TokenType::Comma, word));
         }
-
+        // Newline handler
         else if (word == "\n")
         {
             tokens.push_back(Token(TokenType::Newline, word));
         }
-
+        // UnaryOpcode handler
         else if (word == "IN" || word == "OUT" || word == "INC" || word == "DEC")
         {
             tokens.push_back(Token(TokenType::UnaryOpcode, word));
         }
+        // Register handler
         else if (word == "R0" || word == "R1" || word == "R2" || word == "R3" || word == "R4" || word == "R5" ||
                  word == "R6")
         {
             tokens.push_back(Token(TokenType::Register, word));
+        }
+        // MovOpcode handler
+        else if (word == "MOV")
+        {
+            tokens.push_back(Token(TokenType::MovOpcode, word));
         }
     }
 
