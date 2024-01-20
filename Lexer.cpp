@@ -130,7 +130,12 @@ std::vector<Token> Lexer::getTokens()
         {
             tokens.push_back(Token(TokenType::OpenBracket,word));
         }
-
+        
+        // NumLiteral handler
+        else if(!word.empty() && std::isdigit(word[0]))
+        {
+            tokens.push_back(Token(TokenType::NumLiteral,word));
+        }
     }
 
     return tokens;
