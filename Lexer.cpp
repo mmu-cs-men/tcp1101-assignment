@@ -112,6 +112,14 @@ std::vector<Token> Lexer::getTokens()
         {
             tokens.push_back(Token(TokenType::BitwiseOpcode,word));
         }
+
+        // SerialOpcode handler
+        else if(word == "LOAD" || word == "STORE")
+        {
+            tokens.push_back(Token(TokenType::SerialOpcode,word));
+        }
+
+
     }
 
     return tokens;
