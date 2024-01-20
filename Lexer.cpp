@@ -125,6 +125,12 @@ std::vector<Token> Lexer::getTokens()
             tokens.push_back(Token(TokenType::OpenBracket,word));
         }
 
+        // CloseBracket handler
+        else if(word == "]")
+        {
+            tokens.push_back(Token(TokenType::OpenBracket,word));
+        }
+
     }
 
     return tokens;
