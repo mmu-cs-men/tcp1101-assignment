@@ -15,26 +15,35 @@ Lexer::Lexer(std::string program) : inputProgram(program), currentPosition(0)
 
 std::string Lexer::readWord()
 {
-    std::string word;
-
-    // Skips spases and commas in the start of the program
-    while (currentPosition < inputProgram.length() && (inputProgram[currentPosition] == ' ') ||
-           (inputProgram[currentPosition] == ','))
-    {  
-        currentPosition++;
+    if (inputProgram[currentPosition] == ' ')
+    {
+        // Handle whitespaces and only returns 1 whitespace eventhough program has multiple
+        while (currentPosition < inputProgram.length() && (inputProgram[currentPosition] == ' '))
+        {
+            currentPosition++;
+        }
+        return " ";
     }
 
-    // Reads word until space or comma or newline
-    while (currentPosition < inputProgram.length() &&
-           (inputProgram[currentPosition] != ' ' && inputProgram[currentPosition] != ',' &&
-            inputProgram[currentPosition] != '\n'))
+    if (inputProgram[currentPosition] == ',' || inputProgram[currentPosition] == '\n')
+    {
+
+        /**
+         * new string containing object with lenght of 1
+         * inputProgram[currentPosition++] --> char to be placed in the new string
+         * Char of current posistion of inputProgram
+         * currentPosition++ --> increment to move to next char in inputProgram
+         */
+        return std::string(1, inputProgram[currentPosition++]);
+    }
+
+    // Reads word until hitting space , comma , newline
+    std::string word;
+    while (currentPosition < inputProgram.length() && inputProgram[currentPosition != ' '] &&
+           inputProgram[currentPosition] != ',' && inputProgram[currentPosition] != '/n')
     {
         word += inputProgram[currentPosition];
-        currentPosition++;
-
     }
-
-    return word;
 }
 
 /**
@@ -63,7 +72,6 @@ std::vector<Token> Lexer::getTokens()
         {
             tokens.push_back(Token(TokenType::Register, reg));
             currentPosition++;
-            
         }
     }
 
