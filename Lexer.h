@@ -33,8 +33,7 @@ class Lexer
 
         /**
          * @brief   Declaration of readWord mehtod. 
-         * @note   - Member variable of class Lexer.
-         * @note   - Operates on'inputProgram' & 'currentPosition'
+         * @note   - Operates on 'inputProgram' & 'currentPosition'
          * @param  - None
          * @return - Type string.
         */
