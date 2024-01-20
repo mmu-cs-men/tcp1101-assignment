@@ -132,11 +132,14 @@ std::vector<Token> Lexer::getTokens()
         }
         
         // NumLiteral handler
-        else if(!word.empty() && std::isdigit(word[0]))
+        else if(!word.empty() && std::isdigit(word[0])) //
         {
             tokens.push_back(Token(TokenType::NumLiteral,word));
         }
     }
+    
+    // Eof handler
+    tokens.push_back(Token(TokenType::Eof,""));
 
     return tokens;
 }
