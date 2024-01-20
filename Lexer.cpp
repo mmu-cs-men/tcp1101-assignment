@@ -27,7 +27,6 @@ std::string Lexer::readWord()
 
     if (inputProgram[currentPosition] == ',' || inputProgram[currentPosition] == '\n')
     {
-
         /**
          * new string containing object with lenght of 1
          * inputProgram[currentPosition++] --> char to be placed in the new string
@@ -43,7 +42,10 @@ std::string Lexer::readWord()
            inputProgram[currentPosition] != ',' && inputProgram[currentPosition] != '/n')
     {
         word += inputProgram[currentPosition];
+        currentPosition++;
     }
+
+    return word;
 }
 
 /**
@@ -58,20 +60,33 @@ std::vector<Token> Lexer::getTokens()
 
     while (currentPosition < inputProgram.length())
     {
+
         // Read word from current position
         std::string word = readWord();
 
-        if (word == "IN" || word == "OUT" || word == "INC" || word == "DEC")
+        if (word == " ")
         {
-            tokens.push_back(Token(TokenType::UnaryOpcode, word));
-            currentPosition++;
+            tokens.push_back(Token(TokenType::Whitespace, word));
         }
 
-        std::string reg = readWord();
-        if (reg == "R0" || reg == "R1" || reg == "R2" || reg == "R3" || reg == "R4" || reg == "R5" || reg == "R6")
+        else if (word == ",")
         {
-            tokens.push_back(Token(TokenType::Register, reg));
-            currentPosition++;
+            tokens.push_back(Token(TokenType::Comma, word));
+        }
+
+        else if (word == "\n")
+        {
+            tokens.push_back(Token(TokenType::Newline, word));
+        }
+
+        else if (word == "IN" || word == "OUT" || word == "INC" || word == "DEC")
+        {
+            tokens.push_back(Token(TokenType::UnaryOpcode, word));
+        }
+        else if (word == "R0" || word == "R1" || word == "R2" || word == "R3" || word == "R4" || word == "R5" ||
+                 word == "R6")
+        {
+            tokens.push_back(Token(TokenType::Register, word));
         }
     }
 
