@@ -119,6 +119,11 @@ std::vector<Token> Lexer::getTokens()
             tokens.push_back(Token(TokenType::SerialOpcode,word));
         }
 
+        // OpenBracket handler
+        else if(word == "[")
+        {
+            tokens.push_back(Token(TokenType::OpenBracket,word));
+        }
 
     }
 
