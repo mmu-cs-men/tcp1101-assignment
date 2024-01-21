@@ -29,6 +29,7 @@ class Lexer
 
         // - Tracks current possition in the input program during tokenization. 
         // - Determins where in the ASM code lexer is during tokenization process.
+        // - Initialized to 0
         int currentPosition;
 
         /**
