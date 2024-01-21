@@ -36,15 +36,19 @@ std::string Lexer::readWord()
         return std::string(1, inputProgram[currentPosition++]);
     }
 
-    // Reads word until hitting space , comma , newline
-    std::string word;
-    while (currentPosition < inputProgram.length() && inputProgram[currentPosition != ' '] &&
-           inputProgram[currentPosition] != ',' && inputProgram[currentPosition] != '\n')
-    {
-        word += inputProgram[currentPosition];
-        currentPosition++;
+    // Handle open and close brackets as separate tokens
+    if (inputProgram[currentPosition] == '[' || inputProgram[currentPosition] == ']') {
+        return std::string(1, inputProgram[currentPosition++]);
     }
 
+    // Reads word until hitting space , comma , newline
+    std::string word;
+    while (currentPosition < inputProgram.length() && inputProgram[currentPosition] != ' ' &&
+           inputProgram[currentPosition] != ',' && inputProgram[currentPosition] != '\n' &&
+           inputProgram[currentPosition] != '[' && inputProgram[currentPosition] != ']')
+    {
+        word += inputProgram[currentPosition++];
+    }
     return word;
 }
 
@@ -128,7 +132,7 @@ std::vector<Token> Lexer::getTokens()
         // CloseBracket handler
         else if (word == "]")
         {
-            tokens.push_back(Token(TokenType::OpenBracket, word));
+            tokens.push_back(Token(TokenType::ClosedBracket, word));
         }
 
         // NumLiteral handler
@@ -138,7 +142,7 @@ std::vector<Token> Lexer::getTokens()
         }
     }
 
-    //Handling Eof
+    // Handling Eof
     if (currentPosition >= inputProgram.length())
     {
         tokens.push_back(Token(TokenType::Eof, ""));
