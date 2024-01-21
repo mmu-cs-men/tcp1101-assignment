@@ -9,16 +9,16 @@ class Lexer
 
         /**
          * Constructs a Lexer object.
-         * @param program ASM code as a string to be tokenized.
+         * @param _program ASM code as a string to be tokenized.
          */
-        Lexer(std::string program);
+        Lexer(std::string _program);
 
         /**
          * @param  -None
          * @brief  - Declaration of getTokens() method
          * @note   - Process ASM code and identify tokens.
          * @note   - Example: "IN  R0" will return a vector containing tokens UnaryOpcode, Whitespace, and Register.
-         * @return  Tokens a vector of <Token>.
+         * @return - vector <Token>.
          */
         std::vector<Token>getTokens();
         
