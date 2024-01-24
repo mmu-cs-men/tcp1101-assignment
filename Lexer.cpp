@@ -106,7 +106,7 @@ std::vector<Token> Lexer::getTokens()
         else if (word == "R0" || word == "R1" || word == "R2" || word == "R3" ||
                  word == "R4" || word == "R5" || word == "R6")
         {
-            tokens.push_back(Token(TokenType::Register, word));
+            tokens.push_back(Token(TokenType::Register, word.substr(1, 1)));
         }
 
         // MovOpcode handler
