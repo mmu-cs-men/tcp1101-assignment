@@ -1,5 +1,5 @@
-#include "MachineState.h"
 #include "Runner.h"
+#include "MachineState.h"
 #include <cassert>
 #include <iostream>
 
@@ -115,16 +115,60 @@ void demoInAndOutFunctions()
     std::cout << "Displaying value in Register 0: ";
     runner.out(0); // Prints the value in register 0 to the console
 }
+
+void demoAdditionalFunctions()
+{
+    MachineState ms;
+    Runner runner(ms);
+
+    // Set up a value in memory for the 'load' demonstration
+    ms.memory[5] = 55; // Assuming memory[5] is a valid address
+    runner.load(0, 5); // Load the value from memory[5] into register 0
+    std::cout << "After load: Register 0 contains "
+              << static_cast<int>(ms.registers[0]) << std::endl;
+
+    // Demonstrate 'shr' (shift right)
+    runner.shr(0, 1); // Shift right by 1
+    std::cout << "After shr: Register 0 contains "
+              << static_cast<int>(ms.registers[0]) << std::endl;
+
+    // Demonstrate 'shl' (shift left)
+    runner.shl(0, 1); // Shift left by 1
+    std::cout << "After shl: Register 0 contains "
+              << static_cast<int>(ms.registers[0]) << std::endl;
+
+    // Demonstrate 'ror' (rotate right)
+    runner.ror(0, 1); // Rotate right by 1
+    std::cout << "After ror: Register 0 contains "
+              << static_cast<int>(ms.registers[0]) << std::endl;
+
+    // Demonstrate 'rol' (rotate left)
+    runner.rol(0, 1); // Rotate left by 1
+    std::cout << "After rol: Register 0 contains "
+              << static_cast<int>(ms.registers[0]) << std::endl;
+
+    // Demonstrate 'store'
+    runner.store(0, 6); // Store the value from register 0 into memory[6]
+    std::cout << "After store: Memory[6] contains "
+              << static_cast<int>(ms.memory[6]) << std::endl;
+}
 int main()
 {
+    demoAdditionalFunctions();
+    std::cout << "Additional functions demo passed." << std::endl;
+
     demoInAndOutFunctions();
+    std::cout << "In and Out functions demo passed." << std::endl;
+
     demoRunnerFunctions();
+    std::cout << "Runner functions demo passed." << std::endl;
+
     testMovFunction();
     testAddFunction();
     testSubFunction();
     testMulFunction();
     testDivFunction();
-    // Add calls to other test functions here
+
     std::cout << "All tests passed." << std::endl;
     return 0;
 }
