@@ -1,4 +1,5 @@
 #include "Parser.h"
+#include <iostream> // Include for debug output
 
 Parser::Parser(const std::vector<Token> &tokens)
 {
@@ -36,19 +37,23 @@ void Parser::unaryInstruction()
 
     if (opcode == "IN")
     {
-        Runner::in(registerNum);
+        // Runner::in(registerNum);
+        std::cout << "IN " << registerNum << std::endl;
     }
     else if (opcode == "OUT")
     {
-        Runner::out(registerNum);
+        // Runner::out(registerNum);
+        std::cout << "OUT " << registerNum << std::endl;
     }
     else if (opcode == "INC")
     {
-        Runner::inc(registerNum);
+        // Runner::inc(registerNum);
+        std::cout << "INC " << registerNum << std::endl;
     }
     else if (opcode == "DEC")
     {
-        Runner::dec(registerNum);
+        // Runner::dec(registerNum);
+        std::cout << "DEC " << registerNum << std::endl;
     }
 }
 
@@ -64,14 +69,18 @@ void Parser::movInstruction()
     }
     else if (currentToken.getType() == TokenType::Register)
     {
-        value =
-            Runner::getValueAtRegister(std::stoi(currentToken.getContent()));
+        // value =
+        // Runner::getValueAtRegister(std::stoi(currentToken.getContent()));
+        value = std::stoi(currentToken.getContent()); // Placeholder for debug
+        std::cout << "MOV from Register " << value << std::endl;
     }
     else if (currentToken.getType() == TokenType::OpenBracket)
     {
         nextToken();
-        value = Runner::getValueAtAddress(
-            Runner::getValueAtRegister(std::stoi(currentToken.getContent())));
+        // value =
+        // Runner::getValueAtAddress(Runner::getValueAtRegister(std::stoi(currentToken.getContent())));
+        value = std::stoi(currentToken.getContent()); // Placeholder for debug
+        std::cout << "MOV from Address " << value << std::endl;
         nextToken();
     }
 
@@ -79,7 +88,8 @@ void Parser::movInstruction()
     skipComma();
 
     int registerNum = std::stoi(currentToken.getContent());
-    Runner::mov(value, registerNum);
+    // Runner::mov(value, registerNum);
+    std::cout << "MOV " << value << " to " << registerNum << std::endl;
 }
 
 void Parser::arithmeticInstruction()
@@ -96,19 +106,27 @@ void Parser::arithmeticInstruction()
 
     if (opcode == "ADD")
     {
-        Runner::add(firstRegister, secondRegister);
+        // Runner::add(firstRegister, secondRegister);
+        std::cout << "ADD " << firstRegister << " " << secondRegister
+                  << std::endl;
     }
     else if (opcode == "SUB")
     {
-        Runner::sub(firstRegister, secondRegister);
+        // Runner::sub(firstRegister, secondRegister);
+        std::cout << "SUB " << firstRegister << " " << secondRegister
+                  << std::endl;
     }
     else if (opcode == "MUL")
     {
-        Runner::mul(firstRegister, secondRegister);
+        // Runner::mul(firstRegister, secondRegister);
+        std::cout << "MUL " << firstRegister << " " << secondRegister
+                  << std::endl;
     }
     else if (opcode == "DIV")
     {
-        Runner::div(firstRegister, secondRegister);
+        // Runner::div(firstRegister, secondRegister);
+        std::cout << "DIV " << firstRegister << " " << secondRegister
+                  << std::endl;
     }
 }
 
@@ -126,19 +144,23 @@ void Parser::bitwiseInstruction()
 
     if (opcode == "ROL")
     {
-        Runner::rol(registerNum, value);
+        // Runner::rol(registerNum, value);
+        std::cout << "ROL " << registerNum << " " << value << std::endl;
     }
     else if (opcode == "ROR")
     {
-        Runner::ror(registerNum, value);
+        // Runner::ror(registerNum, value);
+        std::cout << "ROR " << registerNum << " " << value << std::endl;
     }
     else if (opcode == "SHL")
     {
-        Runner::shl(registerNum, value);
+        // Runner::shl(registerNum, value);
+        std::cout << "SHL " << registerNum << " " << value << std::endl;
     }
     else if (opcode == "SHR")
     {
-        Runner::shr(registerNum, value);
+        // Runner::shr(registerNum, value);
+        std::cout << "SHR " << registerNum << " " << value << std::endl;
     }
 }
 
@@ -160,18 +182,23 @@ void Parser::serialInstruction()
     else if (currentToken.getType() == TokenType::OpenBracket)
     {
         nextToken();
-        address =
-            Runner::getValueAtRegister(std::stoi(currentToken.getContent()));
+        // address =
+        // Runner::getValueAtRegister(std::stoi(currentToken.getContent()));
+        address = std::stoi(currentToken.getContent()); // Placeholder for debug
+        std::cout << "Serial Instruction Address " << address << std::endl;
         nextToken();
     }
 
+    // Runner calls commented out and replaced with debug output
     if (opcode == "LOAD")
     {
-        Runner::load(registerNum, address);
+        // Runner::load(registerNum, address);
+        std::cout << "LOAD " << registerNum << " " << address << std::endl;
     }
     else if (opcode == "STORE")
     {
-        Runner::store(registerNum, address);
+        // Runner::store(registerNum, address);
+        std::cout << "STORE " << registerNum << " " << address << std::endl;
     }
 }
 
