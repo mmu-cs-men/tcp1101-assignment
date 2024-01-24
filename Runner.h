@@ -59,7 +59,7 @@ class Runner
 
         /**
          * @brief Adds the values stored in two registers and stores the result
-         * in the first register.
+         * in the second register.
          * @param firstRegisterNum The register number containing the first
          * value.
          * @param secondRegisterNum The register number containing the second
@@ -69,8 +69,8 @@ class Runner
 
         /**
          * @brief Subtracts the value stored in the second register from the
-         * value stored in the first register and stores the result in the first
-         * register.
+         * value stored in the first register and stores the result in the
+         * second register.
          * @param firstRegisterNum The register number containing the first
          * value.
          * @param secondRegisterNum The register number containing the second
@@ -80,7 +80,7 @@ class Runner
 
         /**
          * @brief Multiplies the values stored in two registers and stores the
-         * result in the first register.
+         * result in the second register.
          * @param firstRegisterNum The register number containing the first
          * value.
          * @param secondRegisterNum The register number containing the second
@@ -90,7 +90,7 @@ class Runner
 
         /**
          * @brief Divides the value stored in the first register by the value
-         * stored in the second register and stores the quotient in the first
+         * stored in the second register and stores the quotient in the second
          * register.
          * @param firstRegisterNum The register number containing the dividend.
          * @param secondRegisterNum The register number containing the divisor.
@@ -104,7 +104,7 @@ class Runner
          * rotated.
          * @param value The number of positions to rotate the bits to the left.
          */
-        void rol(int registerNum, int value);
+        void rol(int registerNum, unsigned char value);
 
         /**
          * @brief Rotates the bits of the value stored in the specified register
@@ -113,7 +113,7 @@ class Runner
          * rotated.
          * @param value The number of positions to rotate the bits to the right.
          */
-        void ror(int registerNum, int value);
+        void ror(int registerNum, unsigned char value);
 
         /**
          * @brief Shifts the bits of the value stored in the specified register
@@ -122,7 +122,7 @@ class Runner
          * shifted.
          * @param value The number of positions to shift the bits to the left.
          */
-        void shl(int registerNum, int value);
+        void shl(int registerNum, unsigned char value);
 
         /**
          * @brief Shifts the bits of the value stored in the specified register
@@ -131,7 +131,7 @@ class Runner
          * shifted.
          * @param value The number of positions to shift the bits to the right.
          */
-        void shr(int registerNum, int value);
+        void shr(int registerNum, unsigned char value);
 
         /**
          * @brief Loads the value stored at the specified memory address into
