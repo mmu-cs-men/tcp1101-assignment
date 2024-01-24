@@ -1,11 +1,8 @@
 /*
     This file mainly serves as a test code for the lexer
-    To compile this file, in the terminal paste "g++ --std=c++20 Lexer.cpp Test_Lexer.cpp Token.cpp -o Test_Lexer"
-    To run paste .\Test_Lexer
+    To compile this file, in the terminal paste "g++ --std=c++20 Lexer.cpp
+   Test_Lexer.cpp Token.cpp -o Test_Lexer" To run paste .\Test_Lexer
 */
-
-
-
 
 #include "Lexer.h"
 #include <iostream>
