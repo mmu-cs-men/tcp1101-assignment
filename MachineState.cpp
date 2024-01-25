@@ -15,10 +15,13 @@ MachineState::MachineState()
     }
 }
 
+// I tried okay? I tried to make it readable. I would've succeeded if I could
+// use printf()
 void MachineState::dumpState()
 {
     std::cout << std::setfill(' ') << std::left << std::setw(10) << "Registers"
               << ": ";
+
     for (int i = 0; i < 7; i++)
     {
         if (i == 6)
@@ -31,8 +34,8 @@ void MachineState::dumpState()
                       << " ";
         }
     }
-    std::cout << "#" << std::endl;
 
+    std::cout << "#" << std::endl;
     std::cout << std::setfill(' ') << std::left << std::setw(10) << "Flags"
               << ": " << overflowFlag << " " << carryFlag << " "
               << underflowFlag << " " << zeroFlag << "#" << std::endl;
@@ -48,6 +51,7 @@ void MachineState::dumpState()
             std::cout << std::endl;
         std::cout << std::setfill('0') << std::setw(2) << (int)memory[i] << " ";
     }
+
     std::cout << std::endl;
     std::cout << "#" << std::endl;
 }
