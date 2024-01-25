@@ -1,10 +1,11 @@
 #pragma once
+#include <string>
 
 class MachineState
 {
     public:
         MachineState();
-        void dumpState();
+        std::string dumpState();
 
         unsigned char registers[7];
         unsigned char memory[64];
