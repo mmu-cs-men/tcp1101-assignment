@@ -7,6 +7,37 @@
 #include <string>
 #include <vector>
 
+void stringToFile(std::string &dump)
+{
+    int fileCount = 1;
+    std::string outputFileName;
+    std::ifstream existingFile;
+
+    // Check for existing files and increment fileCount to get the next file
+    // number
+    do
+    {
+        outputFileName = "main_" + std::to_string(fileCount) + ".txt";
+        existingFile.open(outputFileName);
+        if (existingFile.is_open())
+        {
+            fileCount++;
+            existingFile.close();
+        }
+    } while (existingFile);
+
+    std::ofstream outputFile(outputFileName);
+    if (outputFile.is_open())
+    {
+        outputFile << dump;
+        outputFile.close();
+    }
+    else
+    {
+        std::cout << "Unable to create file " << outputFileName << std::endl;
+    }
+}
+
 int main()
 {
     std::string filePath;
@@ -34,5 +65,8 @@ int main()
     std::vector<Token> tokenList = lexer.getTokens();
     Parser parser(tokenList, runner);
     parser.parse();
-    machineState.dumpState();
+    std::string dump = machineState.dumpState();
+    std::cout << dump;
+
+    stringToFile(dump);
 }
