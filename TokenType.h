@@ -1,4 +1,9 @@
 #pragma once
+
+/**
+ * @brief Enum representing the different types of tokens that can be
+ * encountered in the assignment.
+ */
 enum class TokenType
 {
     UnaryOpcode,      // IN, OUT, INC, DEC

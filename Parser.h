@@ -8,7 +8,23 @@
 class Parser
 {
     public:
+        /**
+         * @brief Initializes a Parser object with the given tokens and runner.
+         *
+         * @param tokens The input tokens as a vector of Token objects.
+         * @param runner The Runner object that will execute the parsed
+         * instructions.
+         */
         Parser(const std::vector<Token> &tokens, Runner &runner);
+
+        /**
+         * @brief Parses the tokens and executes the corresponding instructions.
+         *
+         * This function iterates over the tokens and based on the type of each
+         * token, it calls the corresponding instruction function in the Runner
+         * object. It continues parsing and executing until it encounters an Eof
+         * token.
+         */
         void parse();
 
     private:

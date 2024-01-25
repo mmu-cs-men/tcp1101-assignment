@@ -4,7 +4,18 @@
 class MachineState
 {
     public:
+        /**
+         * @brief Initializes MachineState.
+         * Note: all memory addresses and registers are set to 0 here.
+         */
         MachineState();
+
+        /**
+         * @brief Dumps the current state of the machine into a string according
+         * to assignment spec.
+         *
+         * @return A string representation of the current machine state.
+         */
         std::string dumpState();
 
         unsigned char registers[7];
