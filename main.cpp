@@ -7,6 +7,10 @@
 #include <string>
 #include <vector>
 
+// Compile like this:
+// g++ main.cpp Lexer.cpp MachineState.cpp Runner.cpp Parser.cpp Token.cpp -o
+// main
+
 void stringToFile(std::string &dump)
 {
     int fileCount = 1;
