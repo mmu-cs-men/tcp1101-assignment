@@ -7,6 +7,8 @@ Runner::Runner(MachineState &machineState) : machineState(machineState)
 
 void Runner::in(int registerNum)
 {
+    machineState.programCounter++;
+
     // Check if the register number is within the valid range (0 to 6)
     if (registerNum < 0 || registerNum > 6)
     {
@@ -31,6 +33,8 @@ void Runner::in(int registerNum)
 
 void Runner::out(int registerNum)
 {
+    machineState.programCounter++;
+
     // Check if the register number is within the valid range (0 to 6)
     if (registerNum < 0 || registerNum > 6)
     {
@@ -48,6 +52,8 @@ void Runner::out(int registerNum)
 
 void Runner::inc(int registerNum)
 {
+    machineState.programCounter++;
+
     // Check if the register number is within the valid range (0 to 6)
     if (registerNum < 0 || registerNum > 6)
     {
@@ -61,9 +67,9 @@ void Runner::inc(int registerNum)
     // Check for overflow
     if (currentValue == 255)
     {
-
         // Set the overflow flag in MachineState
         machineState.overflowFlag = true;
+        machineState.carryFlag = true;
     }
 
     // Increment the value of the register
@@ -72,6 +78,8 @@ void Runner::inc(int registerNum)
 
 void Runner::dec(int registerNum)
 {
+    machineState.programCounter++;
+
     // Check if the register number is within the valid range (0 to 6)
     if (registerNum < 0 || registerNum > 6)
     {
@@ -125,6 +133,8 @@ unsigned char Runner::getValueAtAddress(int addressNum)
 
 void Runner::mov(int value, int registerNum)
 {
+    machineState.programCounter++;
+
     // Check if the register number is within the valid range (0 to 6)
     if (registerNum < 0 || registerNum > 6)
     {
@@ -146,6 +156,8 @@ void Runner::mov(int value, int registerNum)
 
 void Runner::add(int firstRegisterNum, int secondRegisterNum)
 {
+    machineState.programCounter++;
+
     // Check if the register numbers are within the valid range (0 to 6)
     if (firstRegisterNum < 0 || firstRegisterNum > 6 || secondRegisterNum < 0 ||
         secondRegisterNum > 6)
@@ -172,6 +184,8 @@ void Runner::add(int firstRegisterNum, int secondRegisterNum)
 
 void Runner::sub(int firstRegisterNum, int secondRegisterNum)
 {
+    machineState.programCounter++;
+
     // Check if the register numbers are within the valid range (0 to 6)
     if (firstRegisterNum < 0 || firstRegisterNum > 6 || secondRegisterNum < 0 ||
         secondRegisterNum > 6)
@@ -195,6 +209,8 @@ void Runner::sub(int firstRegisterNum, int secondRegisterNum)
 
 void Runner::mul(int firstRegisterNum, int secondRegisterNum)
 {
+    machineState.programCounter++;
+
     // Validate register numbers
     if (firstRegisterNum < 0 || firstRegisterNum > 6 || secondRegisterNum < 0 ||
         secondRegisterNum > 6)
@@ -209,6 +225,7 @@ void Runner::mul(int firstRegisterNum, int secondRegisterNum)
 
     // Set the carry flag if the result is larger than 255
     machineState.carryFlag = (result > 255);
+    machineState.overflowFlag = (result > 255);
 
     // Store the result in the second register
     machineState.registers[secondRegisterNum] =
@@ -217,6 +234,8 @@ void Runner::mul(int firstRegisterNum, int secondRegisterNum)
 
 void Runner::div(int firstRegisterNum, int secondRegisterNum)
 {
+    machineState.programCounter++;
+
     // Validate register numbers
     if (firstRegisterNum < 0 || firstRegisterNum > 6 || secondRegisterNum < 0 ||
         secondRegisterNum > 6)
@@ -243,6 +262,8 @@ void Runner::div(int firstRegisterNum, int secondRegisterNum)
 
 void Runner::rol(int registerNum, unsigned char value)
 {
+    machineState.programCounter++;
+
     // Validate register number
     if (registerNum < 0 || registerNum > 6)
     {
@@ -267,6 +288,8 @@ void Runner::rol(int registerNum, unsigned char value)
 
 void Runner::ror(int registerNum, unsigned char value)
 {
+    machineState.programCounter++;
+
     // Validate register number
     if (registerNum < 0 || registerNum > 6)
     {
@@ -291,6 +314,8 @@ void Runner::ror(int registerNum, unsigned char value)
 
 void Runner::shl(int registerNum, unsigned char value)
 {
+    machineState.programCounter++;
+
     // Validate register number
     if (registerNum < 0 || registerNum > 6)
     {
@@ -320,6 +345,8 @@ void Runner::shl(int registerNum, unsigned char value)
 
 void Runner::shr(int registerNum, unsigned char value)
 {
+    machineState.programCounter++;
+
     // Validate register number
     if (registerNum < 0 || registerNum > 6)
     {
@@ -344,6 +371,8 @@ void Runner::shr(int registerNum, unsigned char value)
 
 void Runner::load(int registerNum, int addressNum)
 {
+    machineState.programCounter++;
+
     // Validate register number
     if (registerNum < 0 || registerNum > 6)
     {
@@ -364,6 +393,8 @@ void Runner::load(int registerNum, int addressNum)
 
 void Runner::store(int registerNum, int addressNum)
 {
+    machineState.programCounter++;
+
     // Validate register number
     if (registerNum < 0 || registerNum > 6)
     {
