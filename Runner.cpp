@@ -69,7 +69,7 @@ void Runner::inc(int registerNum)
     {
         // Set the overflow flag in MachineState
         machineState.overflowFlag = true;
-        machineState.carryFlag = true;
+        machineState.zeroFlag = true;
     }
 
     // Increment the value of the register
@@ -93,9 +93,12 @@ void Runner::dec(int registerNum)
     // Check for underflow
     if (currentValue == 0)
     {
-
         // Set the underflow flag in MachineState
         machineState.underflowFlag = true;
+    }
+    else if (currentValue == 1)
+    {
+        machineState.zeroFlag = true;
     }
 
     // Decrement the value of the register
@@ -170,9 +173,6 @@ void Runner::add(int firstRegisterNum, int secondRegisterNum)
     int result = machineState.registers[firstRegisterNum] +
                  machineState.registers[secondRegisterNum];
 
-    // Set or clear the carry flag based on the result
-    machineState.carryFlag = (result > 255);
-
     // Store the result in the second register, truncating to 8 bits if
     // necessary
     machineState.registers[secondRegisterNum] =
@@ -180,6 +180,7 @@ void Runner::add(int firstRegisterNum, int secondRegisterNum)
 
     // Optionally set the overflow flag if the result exceeded 8 bits
     machineState.overflowFlag = (result > 255);
+    machineState.zeroFlag = (result % 256 == 0 || result == 0);
 }
 
 void Runner::sub(int firstRegisterNum, int secondRegisterNum)
@@ -200,6 +201,7 @@ void Runner::sub(int firstRegisterNum, int secondRegisterNum)
 
     // Set or clear the underflow flag based on the result
     machineState.underflowFlag = (result < 0);
+    machineState.zeroFlag = (result == 0);
 
     // Store the result in the second register, ensuring it stays within 0-255
     // range
@@ -224,8 +226,8 @@ void Runner::mul(int firstRegisterNum, int secondRegisterNum)
                  machineState.registers[secondRegisterNum];
 
     // Set the carry flag if the result is larger than 255
-    machineState.carryFlag = (result > 255);
     machineState.overflowFlag = (result > 255);
+    machineState.zeroFlag = (result == 0);
 
     // Store the result in the second register
     machineState.registers[secondRegisterNum] =
@@ -258,6 +260,8 @@ void Runner::div(int firstRegisterNum, int secondRegisterNum)
     // Store the result in the second register
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
+
+    machineState.zeroFlag = (result == 0);
 }
 
 void Runner::rol(int registerNum, unsigned char value)
@@ -284,6 +288,8 @@ void Runner::rol(int registerNum, unsigned char value)
 
     // Store the result back in the register
     machineState.registers[registerNum] = regValue;
+
+    machineState.zeroFlag = (regValue == 0);
 }
 
 void Runner::ror(int registerNum, unsigned char value)
@@ -310,6 +316,8 @@ void Runner::ror(int registerNum, unsigned char value)
 
     // Store the result back in the register
     machineState.registers[registerNum] = regValue;
+
+    machineState.zeroFlag = (regValue == 0);
 }
 
 void Runner::shl(int registerNum, unsigned char value)
@@ -325,22 +333,41 @@ void Runner::shl(int registerNum, unsigned char value)
 
     // Get the current value in the register
     unsigned char regValue = machineState.registers[registerNum];
+    unsigned char overflowCheck = regValue;
 
     // Perform the shift
     for (unsigned char i = 0; i < value; ++i)
     {
-        // Shift left the 7 least significant bits
-        bool msb = regValue & 0x40; // Check the second most significant bit
-        regValue = (regValue << 1) & 0xFE; // Clear the most significant bit
-        if (msb)
+        // Check for overflow before the shift
+        if (regValue & 0x80) // If the most significant bit is set
         {
-            regValue |=
-                0x01; // Set the least significant bit if the second MSB was 1
+            machineState.overflowFlag = true;
         }
+        regValue <<= 1; // Shift left by one position
     }
+
+    // Check for underflow, which is not possible with left shift
+    // Hence, underflowFlag is not set in this operation
 
     // Store the result back in the register
     machineState.registers[registerNum] = regValue;
+
+    // Set zeroFlag if the result is zero
+    machineState.zeroFlag = (regValue == 0);
+
+    // If the shift value is greater than or equal to the number of bits (8),
+    // the result must be zero, and overflow must have occurred.
+    if (value >= 8)
+    {
+        machineState.zeroFlag = true;
+        machineState.overflowFlag = true;
+    }
+    // Additionally, if the original value was non-zero and the shift resulted
+    // in zero, it's an overflow situation.
+    else if (overflowCheck != 0 && regValue == 0)
+    {
+        machineState.overflowFlag = true;
+    }
 }
 
 void Runner::shr(int registerNum, unsigned char value)
@@ -356,17 +383,41 @@ void Runner::shr(int registerNum, unsigned char value)
 
     // Get the current value in the register
     unsigned char regValue = machineState.registers[registerNum];
-    unsigned char msb = regValue & 0x80; // Preserve the most significant bit
+    unsigned char underflowCheck = regValue;
 
     // Perform the shift
     for (unsigned char i = 0; i < value; ++i)
     {
-        regValue =
-            (regValue >> 1) | msb; // Shift right 7 bits, keep MSB constant
+        // Check for underflow before the shift
+        if (regValue & 0x01) // If the least significant bit is set
+        {
+            machineState.underflowFlag = true;
+        }
+        regValue >>= 1; // Shift right by one position
     }
 
     // Store the result back in the register
     machineState.registers[registerNum] = regValue;
+
+    // Set zeroFlag if the result is zero
+    machineState.zeroFlag = (regValue == 0);
+
+    // Overflow is not possible with right shift, so overflowFlag is not set
+    // here
+
+    // If the shift value is greater than or equal to the number of bits (8),
+    // the result must be zero, and underflow must have occurred.
+    if (value >= 8)
+    {
+        machineState.zeroFlag = true;
+        machineState.underflowFlag = true;
+    }
+    // Additionally, if the original value was non-zero and the shift resulted
+    // in zero, it's an underflow situation.
+    else if (underflowCheck != 0 && regValue == 0)
+    {
+        machineState.underflowFlag = true;
+    }
 }
 
 void Runner::load(int registerNum, int addressNum)
