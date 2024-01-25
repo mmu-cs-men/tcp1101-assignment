@@ -4,6 +4,7 @@ class MachineState
 {
     public:
         MachineState();
+        void dumpState();
 
         unsigned char registers[7];
         unsigned char memory[64];
