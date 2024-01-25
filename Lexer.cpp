@@ -1,6 +1,7 @@
 #include "Lexer.h"
 #include "Token.h"
 #include "TokenType.h"
+#include <cstdlib>
 #include <iostream>
 
 Lexer::Lexer(std::string program) : inputProgram(program)
@@ -128,7 +129,21 @@ std::vector<Token> Lexer::getTokens()
         // NumLiteral handler
         else if (!word.empty() && std::isdigit(word[0]))
         {
+            int numValue = std::stoi(word);
+
+            if (numValue < 0 || numValue > 255)
+            {
+                std::cout << "Error: Number out of range (0-255): " << word
+                          << "." << std::endl;
+                std::exit(EXIT_FAILURE);
+            }
+
             tokens.push_back(Token(TokenType::NumLiteral, word));
+        }
+        else
+        {
+            std::cout << "Error: Unknown token " << word << "." << std::endl;
+            std::exit(EXIT_FAILURE);
         }
     }
 
