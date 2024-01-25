@@ -5,7 +5,6 @@ class MachineState
     public:
         MachineState();
 
-    private:
         unsigned char registers[7];
         unsigned char memory[64];
         unsigned programCounter = 0;
