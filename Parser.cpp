@@ -16,7 +16,7 @@ Token Parser::getPrevToken()
 void Parser::throwSyntaxError(std::string errorMsg)
 {
     std::cout << "Syntax error at line " << lineCounter << ". " << errorMsg
-              << "." << std::endl;
+              << std::endl;
     std::exit(EXIT_FAILURE);
 }
 
