@@ -12,7 +12,7 @@ class Token
          * @param _content The content of the token. For example, if type is
          * `TokenType::UnaryOpcode`, content must be either IN, OUT, INC, DEC
          */
-        Token(TokenType _type, std::string _content);
+        Token(TokenType type, std::string content);
 
         /**
          * @brief Gets the content of the token.
