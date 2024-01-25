@@ -20,8 +20,8 @@ void MachineState::dumpState()
     std::cout << "Registers: ";
     for (int i = 0; i < 7; i++)
     {
-        std::cout << std::setfill('0') << std::setw(2) << std::hex
-                  << (int)registers[i] << " ";
+        std::cout << std::setfill('0') << std::setw(2) << (int)registers[i]
+                  << " ";
     }
     std::cout << "#" << std::endl;
 
