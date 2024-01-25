@@ -19,7 +19,8 @@ int main()
     std::ifstream file(filePath);
     if (!file)
     {
-        std::cout << "Unable to open file " << filePath << std::endl;
+        std::cout << "Unable to open file " << filePath << std::endl
+                  << std::endl;
         return 1;
     }
 
