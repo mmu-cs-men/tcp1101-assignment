@@ -10,7 +10,7 @@ class MachineState
         unsigned char memory[64];
         unsigned programCounter = 0;
         bool overflowFlag = false;
-        bool carryFlag = false;
+        bool &carryFlag = overflowFlag;
         bool underflowFlag = false;
         bool zeroFlag = false;
 };
