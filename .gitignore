@@ -36,3 +36,6 @@
 
 #VSCode
 .vscode/
+
+# ASM files
+*.asm
