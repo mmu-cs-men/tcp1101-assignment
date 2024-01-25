@@ -49,6 +49,8 @@ class Runner
          */
         unsigned char getValueAtRegister(int registerNum);
 
+        unsigned char getValueAtAddress(int addressNum);
+
         /**
          * @brief Stores the specified value in the specified register.
          * @param value The value to be stored.

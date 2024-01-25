@@ -109,6 +109,20 @@ unsigned char Runner::getValueAtRegister(int registerNum)
     return machineState.registers[registerNum];
 }
 
+unsigned char Runner::getValueAtAddress(int addressNum)
+{
+    // Validate memory address
+    if (addressNum < 0 || addressNum >= 64) // Assuming 64 is the size of memory
+    {
+        std::cout << "Error: Invalid memory address. Returning 0." << std::endl;
+        return 0; // Return 0 or some other error code that your design
+                  // specifies
+    }
+
+    // Return the value stored at the specified memory address
+    return machineState.memory[addressNum];
+}
+
 void Runner::mov(int value, int registerNum)
 {
     // Check if the register number is within the valid range (0 to 6)
