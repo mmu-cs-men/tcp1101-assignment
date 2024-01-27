@@ -71,6 +71,7 @@ void Parser::skipComma()
 void Parser::unaryInstruction()
 {
     std::string opcode = currentToken.getContent();
+    nextToken();
     assertWhitespace();
     skipWhitespace();
     assertRegister(opcode);
