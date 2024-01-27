@@ -11,6 +11,7 @@ void Runner::in(int registerNum)
     machineState.programCounter++; // there's gotta be a better way to do this
 
     int value;
+    std::cout << "Enter input to be put into R" << registerNum << ": ";
     std::cin >> value;
 
     if (value < 0 || value > 255)
