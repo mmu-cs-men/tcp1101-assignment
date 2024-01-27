@@ -311,6 +311,10 @@ void Parser::parse()
     while (currentToken.getType() != TokenType::Eof)
     {
         skipWhitespace();
+        if (currentToken.getType() == TokenType::Eof)
+        {
+            break;
+        }
         instruction();
         nextToken();
     }
