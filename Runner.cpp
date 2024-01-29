@@ -175,27 +175,18 @@ void Runner::shl(int registerNum, unsigned char value)
     machineState.programCounter++;
 
     unsigned char regValue = machineState.registers[registerNum];
-    unsigned char overflowCheck = regValue;
 
     for (unsigned char i = 0; i < value; ++i)
     {
-        // if msb is set then overflow
         if (regValue & 0x80)
         {
-            machineState.overflowFlag = true;
+            machineState.carryFlag = true;
         }
         regValue <<= 1;
     }
 
     machineState.zeroFlag = (regValue == 0);
-
     machineState.registers[registerNum] = regValue;
-
-    if (value >= 8)
-    {
-        machineState.zeroFlag = true;
-        machineState.overflowFlag = true;
-    }
 }
 
 void Runner::shr(int registerNum, unsigned char value)
@@ -203,27 +194,18 @@ void Runner::shr(int registerNum, unsigned char value)
     machineState.programCounter++;
 
     unsigned char regValue = machineState.registers[registerNum];
-    unsigned char underflowCheck = regValue;
 
     for (unsigned char i = 0; i < value; ++i)
     {
-        // if lsb is set then underflow
         if (regValue & 0x01)
         {
-            machineState.underflowFlag = true;
+            machineState.carryFlag = true;
         }
         regValue >>= 1;
     }
 
-    machineState.registers[registerNum] = regValue;
-
     machineState.zeroFlag = (regValue == 0);
-
-    if (value >= 8)
-    {
-        machineState.zeroFlag = true;
-        machineState.underflowFlag = true;
-    }
+    machineState.registers[registerNum] = regValue;
 }
 
 void Runner::load(int registerNum, int addressNum)
