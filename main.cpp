@@ -45,11 +45,10 @@ void stringToFile(std::string &dump)
 int main()
 {
     std::string filePath;
-    std::cout << "Please enter path to an .asm file. You may enter an absolute "
-                 "or relative path."
+    std::cout << "Please enter path to an .asm file. Relative path recommended."
               << std::endl;
     std::cout << "Input file path: ";
-    std::cin >> filePath;
+    std::getline(std::cin, filePath);
 
     std::ifstream file(filePath);
     if (!file)
