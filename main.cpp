@@ -7,9 +7,12 @@
 #include <string>
 #include <vector>
 
+// clang-format off
+
 // Compile like this:
-// g++ main.cpp Lexer.cpp MachineState.cpp Runner.cpp Parser.cpp Token.cpp -o
-// main
+// g++ -std=c++11 main.cpp Lexer.cpp MachineState.cpp Runner.cpp Parser.cpp Token.cpp -o main
+
+// clang-format on
 
 void stringToFile(std::string &dump)
 {
