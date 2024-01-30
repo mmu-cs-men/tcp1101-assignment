@@ -130,6 +130,11 @@ void Parser::movInstruction()
             throwSyntaxError("Expected ']' after register");
         }
     }
+    else
+    {
+        throwSyntaxError("Expected a number, register or [register], got " +
+                         currentToken.getContent() + " instead");
+    }
 
     nextToken();
     skipComma();
@@ -259,6 +264,11 @@ void Parser::serialInstruction()
         {
             throwSyntaxError("Expected ']' after register");
         }
+    }
+    else
+    {
+        throwSyntaxError("Expected an address or [register], got " +
+                         currentToken.getContent() + " instead");
     }
 
     if (opcode == "LOAD")
