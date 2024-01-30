@@ -33,8 +33,8 @@ std::string MachineState::dumpState()
     ss << "#" << std::endl;
 
     // Dump flags
-    ss << "Flags     : " << overflowFlag << " " << carryFlag << " "
-       << underflowFlag << " " << zeroFlag << "#" << std::endl;
+    ss << "Flags     : " << overflowFlag << " " << underflowFlag << " "
+       << carryFlag << " " << zeroFlag << "#" << std::endl;
 
     // Dump program counter
     ss << "PC        : " << std::dec << programCounter << std::endl
