@@ -38,8 +38,11 @@ void Runner::inc(int registerNum)
 
     unsigned char currentValue = machineState.registers[registerNum];
 
-    // Why would you do this??
-    machineState.overflowFlag = machineState.zeroFlag = (currentValue == 255);
+    if (currentValue == 255)
+    {
+        machineState.overflowFlag = true;
+        machineState.zeroFlag = true;
+    }
 
     machineState.registers[registerNum] = currentValue + 1;
 }
@@ -50,8 +53,14 @@ void Runner::dec(int registerNum)
 
     unsigned char currentValue = machineState.registers[registerNum];
 
-    machineState.underflowFlag = (currentValue == 0);
-    machineState.zeroFlag = (currentValue == 1);
+    if (currentValue == 0)
+    {
+        machineState.underflowFlag = true;
+    }
+    else if (currentValue == 1)
+    {
+        machineState.zeroFlag = true;
+    }
 
     machineState.registers[registerNum] = currentValue - 1;
 }
@@ -82,8 +91,14 @@ void Runner::add(int firstRegisterNum, int secondRegisterNum)
     int result = machineState.registers[firstRegisterNum] +
                  machineState.registers[secondRegisterNum];
 
-    machineState.overflowFlag = (result > 255);
-    machineState.zeroFlag = (result % 256 == 0 || result == 0);
+    if (result > 255)
+    {
+        machineState.overflowFlag = true;
+    }
+    else if (result % 256 == 0 || result == 0)
+    {
+        machineState.zeroFlag = true;
+    }
 
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
@@ -96,8 +111,14 @@ void Runner::sub(int firstRegisterNum, int secondRegisterNum)
     int result = machineState.registers[secondRegisterNum] -
                  machineState.registers[firstRegisterNum];
 
-    machineState.underflowFlag = (result < 0);
-    machineState.zeroFlag = (result == 0);
+    if (result < 0)
+    {
+        machineState.underflowFlag = true;
+    }
+    else if (result == 0)
+    {
+        machineState.zeroFlag = true;
+    }
 
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
@@ -110,8 +131,14 @@ void Runner::mul(int firstRegisterNum, int secondRegisterNum)
     int result = machineState.registers[firstRegisterNum] *
                  machineState.registers[secondRegisterNum];
 
-    machineState.overflowFlag = (result > 255);
-    machineState.zeroFlag = (result == 0);
+    if (result > 255)
+    {
+        machineState.overflowFlag = true;
+    }
+    else if (result == 0)
+    {
+        machineState.zeroFlag = true;
+    }
 
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
@@ -130,7 +157,10 @@ void Runner::div(int firstRegisterNum, int secondRegisterNum)
     int result = machineState.registers[secondRegisterNum] /
                  machineState.registers[firstRegisterNum];
 
-    machineState.zeroFlag = (result == 0);
+    if (result == 0)
+    {
+        machineState.zeroFlag = true;
+    }
 
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
@@ -148,7 +178,10 @@ void Runner::rol(int registerNum, unsigned char value)
         regValue = (regValue << 1) | (msb >> 7);
     }
 
-    machineState.zeroFlag = (regValue == 0);
+    if (regValue == 0)
+    {
+        machineState.zeroFlag = true;
+    }
 
     machineState.registers[registerNum] = regValue;
 }
@@ -165,7 +198,10 @@ void Runner::ror(int registerNum, unsigned char value)
         regValue = (regValue >> 1) | (lsb << 7);
     }
 
-    machineState.zeroFlag = (regValue == 0);
+    if (regValue == 0)
+    {
+        machineState.zeroFlag = true;
+    }
 
     machineState.registers[registerNum] = regValue;
 }
@@ -185,7 +221,11 @@ void Runner::shl(int registerNum, unsigned char value)
         regValue <<= 1;
     }
 
-    machineState.zeroFlag = (regValue == 0);
+    if (regValue == 0)
+    {
+        machineState.zeroFlag = true;
+    }
+
     machineState.registers[registerNum] = regValue;
 }
 
@@ -204,7 +244,11 @@ void Runner::shr(int registerNum, unsigned char value)
         regValue >>= 1;
     }
 
-    machineState.zeroFlag = (regValue == 0);
+    if (regValue == 0)
+    {
+        machineState.zeroFlag = true;
+    }
+
     machineState.registers[registerNum] = regValue;
 }
 
