@@ -174,8 +174,8 @@ void Runner::rol(int registerNum, unsigned char value)
 
     for (unsigned char i = 0; i < value; ++i)
     {
-        bool msb = regValue & 0x80;
-        regValue = (regValue << 1) | (msb >> 7);
+        unsigned char msb = (regValue & 0x80) >> 7;
+        regValue = (regValue << 1) | msb;
     }
 
     if (regValue == 0)
@@ -194,8 +194,8 @@ void Runner::ror(int registerNum, unsigned char value)
 
     for (unsigned char i = 0; i < value; ++i)
     {
-        bool lsb = regValue & 0x01;
-        regValue = (regValue >> 1) | (lsb << 7);
+        unsigned char lsb = (regValue & 0x01) << 7;
+        regValue = (regValue >> 1) | lsb;
     }
 
     if (regValue == 0)
