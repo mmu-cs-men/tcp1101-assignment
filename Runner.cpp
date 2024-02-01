@@ -21,8 +21,6 @@ void Runner::in(int registerNum)
     }
 
     machineState.registers[registerNum] = static_cast<unsigned char>(value);
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::out(int registerNum)
@@ -32,8 +30,6 @@ void Runner::out(int registerNum)
     unsigned char value = machineState.registers[registerNum];
 
     std::cout << static_cast<int>(value) << std::endl;
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::inc(int registerNum)
@@ -49,8 +45,6 @@ void Runner::inc(int registerNum)
     }
 
     machineState.registers[registerNum] = currentValue + 1;
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::dec(int registerNum)
@@ -69,8 +63,6 @@ void Runner::dec(int registerNum)
     }
 
     machineState.registers[registerNum] = currentValue - 1;
-
-    std::cout << machineState.dumpState();
 }
 
 // no program counter bcuz this is a helper functions for the parser
@@ -90,8 +82,6 @@ void Runner::mov(int value, int registerNum)
 {
     machineState.programCounter++;
     machineState.registers[registerNum] = static_cast<unsigned char>(value);
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::add(int firstRegisterNum, int secondRegisterNum)
@@ -112,8 +102,6 @@ void Runner::add(int firstRegisterNum, int secondRegisterNum)
 
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::sub(int firstRegisterNum, int secondRegisterNum)
@@ -134,8 +122,6 @@ void Runner::sub(int firstRegisterNum, int secondRegisterNum)
 
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::mul(int firstRegisterNum, int secondRegisterNum)
@@ -156,8 +142,6 @@ void Runner::mul(int firstRegisterNum, int secondRegisterNum)
 
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::div(int firstRegisterNum, int secondRegisterNum)
@@ -180,8 +164,6 @@ void Runner::div(int firstRegisterNum, int secondRegisterNum)
 
     machineState.registers[secondRegisterNum] =
         static_cast<unsigned char>(result);
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::rol(int registerNum, unsigned char value)
@@ -202,8 +184,6 @@ void Runner::rol(int registerNum, unsigned char value)
     }
 
     machineState.registers[registerNum] = regValue;
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::ror(int registerNum, unsigned char value)
@@ -224,8 +204,6 @@ void Runner::ror(int registerNum, unsigned char value)
     }
 
     machineState.registers[registerNum] = regValue;
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::shl(int registerNum, unsigned char value)
@@ -249,8 +227,6 @@ void Runner::shl(int registerNum, unsigned char value)
     }
 
     machineState.registers[registerNum] = regValue;
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::shr(int registerNum, unsigned char value)
@@ -274,22 +250,16 @@ void Runner::shr(int registerNum, unsigned char value)
     }
 
     machineState.registers[registerNum] = regValue;
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::load(int registerNum, int addressNum)
 {
     machineState.programCounter++;
     machineState.registers[registerNum] = machineState.memory[addressNum];
-
-    std::cout << machineState.dumpState();
 }
 
 void Runner::store(int registerNum, int addressNum)
 {
     machineState.programCounter++;
     machineState.memory[addressNum] = machineState.registers[registerNum];
-
-    std::cout << machineState.dumpState();
 }
