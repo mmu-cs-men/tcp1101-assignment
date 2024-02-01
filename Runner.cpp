@@ -214,10 +214,6 @@ void Runner::shl(int registerNum, unsigned char value)
 
     for (unsigned char i = 0; i < value; ++i)
     {
-        if (regValue & 0x80)
-        {
-            machineState.carryFlag = true;
-        }
         regValue <<= 1;
     }
 
@@ -237,10 +233,6 @@ void Runner::shr(int registerNum, unsigned char value)
 
     for (unsigned char i = 0; i < value; ++i)
     {
-        if (regValue & 0x01)
-        {
-            machineState.carryFlag = true;
-        }
         regValue >>= 1;
     }
 
